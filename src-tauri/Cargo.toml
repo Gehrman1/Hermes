@@ -1,0 +1,28 @@
+[package]
+name = "hermes"
+version = "0.0.0"
+description = "A Tauri App"
+authors = ["you"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[build-dependencies]
+tauri-build = { version = "1", features = [] }
+
+[dependencies]
+tauri = { version = "1", features = [ "fs-all", "shell-open"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1.38.0", features = ["full"] }
+flate2 = "1.0.30"
+rfd = "0.14.1"
+tar = "0.4.41"
+anyhow = "1.0.86"
+walkdir = "2.5.0"
+netstat2 = "0.9.1"
+local-ip-address = "0.6.1"
+
+[features]
+# This feature is used for production builds or when a dev server is not specified, DO NOT REMOVE!!
+custom-protocol = ["tauri/custom-protocol"]
