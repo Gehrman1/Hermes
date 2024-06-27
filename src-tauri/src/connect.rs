@@ -8,22 +8,40 @@ use netstat2::{get_sockets_info, AddressFamilyFlags, ProtocolFlags, ProtocolSock
 use local_ip_address::local_ip;
 
 
-#[tauri::command]
-pub async fn connect_command() -> Result<(), String> {
-    connect().await;
+#[tauri::command(async)]
+pub async fn connect_command(ip_connect:String) -> Result<(), String> {
+    println!("Here");
+    connect(ip_connect).await;
   Ok(())
 }
 
 
 
 
-async fn connect()   {
+async fn connect(ip_connect:String)   {
+    let mut final_ip:String;
     println!("Here");
+    // need to make it more specific
+    let value_to_compare = "0.0.0.0";
     let my_local_ip = local_ip().unwrap();
+
+    // Extract the first 5 characters
+    let substring = &ip_connect[0..7];
+    if substring == value_to_compare {
+      
+        let port_substring = &ip_connect[7..12];
+       final_ip = format!("{}{}", my_local_ip, port_substring);
+
+    } else {
+        final_ip = ip_connect
+    }
+
+
+    
     println!("Here");
     
    
-    let mut socket = TcpStream::connect(format!("{}:8080", my_local_ip)).await.unwrap();
+    let mut socket = TcpStream::connect(final_ip.to_string()).await.unwrap();
     let (mut rd, mut wr) = tokio::io::split(socket);
 
 
