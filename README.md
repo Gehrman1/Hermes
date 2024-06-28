@@ -8,7 +8,7 @@ This template should help get you started developing with Tauri and React in Vit
 
 ## Things to fix and change
 - [ ] Better Ui
-- [ ] Fix how i save files. Currently have to copy the file into a .tar, This is fine for files that are small but larger files it is inefficient. Need to research how to read through directories in order and send to the client and reformat it there
+- [x] Fix how i save files. Currently have to copy the file into a .tar, This is fine for files that are small but larger files it is inefficient. Need to research how to read through directories in order and send to the client and reformat it there
 - [ ] Add a History for file transfers.
 - [ ] Allow user to choose file or folder
 - [ ] Add tests for the code
