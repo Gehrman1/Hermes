@@ -154,7 +154,7 @@ async fn file() -> io::Result<()> {
     let listener = TcpListener::bind(("0.0.0.0", 8080)).await?;
     println!("Server started");
 
-    let src = Path::new("C:/Users/Abdul/Desktop/projects/hello_cargo");
+     
 
     loop {
         // let (mut socket, _) = listener.accept().await?;
@@ -166,6 +166,14 @@ async fn file() -> io::Result<()> {
         match listener.accept().await {
             
                         Ok((mut socket, addr)) => {
+                            let folder = FileDialog::new()
+                            .add_filter("folder", &[""])
+                            .set_directory("/")
+                            .pick_folder();
+                        let v = folder.unwrap();
+                        
+                        
+                            let src = Path::new(&v);
                             println!("Server started and conneccted 2");
                             match send_folder(src, &mut socket).await {
                                 Ok(_) => println!("Folder sent successfully!"),
